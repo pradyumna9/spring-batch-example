@@ -3,6 +3,8 @@ package com.spring.batch.springbatchexample.config;
 import com.spring.batch.springbatchexample.mapper.MandateToMandateTransformedMapper;
 import com.spring.batch.springbatchexample.model.Mandate;
 import com.spring.batch.springbatchexample.model.TransformedMandate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,8 @@ public class MandateItemProcessor implements ItemProcessor<Mandate, TransformedM
     @Autowired
     private MandateToMandateTransformedMapper mandateToMandateTransformedMapper;
 
+    private Logger LOGGER = LoggerFactory.getLogger(MandateItemProcessor.class);
+
 
     public MandateItemProcessor(){
         COUNTRY_CODE_MAP = new HashMap<>();
@@ -25,11 +29,13 @@ public class MandateItemProcessor implements ItemProcessor<Mandate, TransformedM
     }
     @Override
     public TransformedMandate process(Mandate mandate) throws Exception {
-        System.out.println("Mandate Process........");
+        //System.out.println("Mandate Process........");
+        LOGGER.info("Mandate Process........");
         String countryCode = COUNTRY_CODE_MAP.get(mandate.getCountryCode());
         mandate.setCountryCode(countryCode);
         TransformedMandate transformedMandate = mandateToMandateTransformedMapper.mandateToTransformedMandate(mandate);
-        System.out.println("Mandate Processed........:"+countryCode);
+        //System.out.println("Mandate Processed........:"+countryCode);
+        LOGGER.info("Mandate Processed........:{}",countryCode);
         return transformedMandate;
     }
 }

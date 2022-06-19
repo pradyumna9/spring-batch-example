@@ -2,6 +2,8 @@ package com.spring.batch.springbatchexample.config;
 
 import com.spring.batch.springbatchexample.model.Mandate;
 import com.spring.batch.springbatchexample.model.TransformedMandate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -23,6 +25,8 @@ import org.springframework.core.io.Resource;
 @EnableBatchProcessing
 public class SpringBatchConfig {
 
+    private Logger LOGGER = LoggerFactory.getLogger(SpringBatchConfig.class);
+
     @Bean
     public Job createJob(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
                          ItemReader<Mandate> itemReader
@@ -35,7 +39,8 @@ public class SpringBatchConfig {
 
     @Bean
     public FlatFileItemReader<Mandate> getItemReader(@Value("${mandate_reader}") Resource resource){
-        System.out.println("Item Reader Started");
+      //  System.out.println("Item Reader Started");
+        LOGGER.info("Item Reader Started");
         FlatFileItemReader<Mandate> flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setStrict(true);
         flatFileItemReader.setLinesToSkip(1);

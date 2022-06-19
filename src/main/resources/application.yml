@@ -3,7 +3,8 @@ server:
 mandate_reader: file:/Users/pradyumnakumardas/Documents/workbook/spring-batch-example 2/src/main/resources/mandate.csv
 spring:
   batch:
-    enabled: false
+    job:
+      enabled: false
   h2:
     console:
       path: /h2-console

@@ -7,10 +7,10 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class TransformedMandate {
+public class TransformedLiquid {
     @Id
-    private int mandateId;
-    private String mandateRef;
+    private int liquidId;
+    private String liquidRef;
     private String countryCode;
     private String type;
 }

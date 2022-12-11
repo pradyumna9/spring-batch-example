@@ -1,7 +1,7 @@
 package com.spring.batch.springbatchexample.config;
 
-import com.spring.batch.springbatchexample.model.Mandate;
-import com.spring.batch.springbatchexample.model.TransformedMandate;
+import com.spring.batch.springbatchexample.model.Liquid;
+import com.spring.batch.springbatchexample.model.TransformedLiquid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -29,19 +29,19 @@ public class SpringBatchConfig {
 
     @Bean
     public Job createJob(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
-                         ItemReader<Mandate> itemReader
-                       , ItemWriter<TransformedMandate> itemWriter
-            , ItemProcessor<Mandate, TransformedMandate> itemProcessor){
-        Step step = stepBuilderFactory.get("MY-FIRST-STEP").<Mandate,TransformedMandate>chunk(100)
+                         ItemReader<Liquid> itemReader
+                       , ItemWriter<TransformedLiquid> itemWriter
+            , ItemProcessor<Liquid, TransformedLiquid> itemProcessor){
+        Step step = stepBuilderFactory.get("MY-FIRST-STEP").<Liquid, TransformedLiquid>chunk(100)
                 .reader(itemReader).processor(itemProcessor).writer(itemWriter).build();
         return jobBuilderFactory.get("MY-FIRST-JOB").start(step).build();
     }
 
     @Bean
-    public FlatFileItemReader<Mandate> getItemReader(@Value("${mandate_reader}") Resource resource){
+    public FlatFileItemReader<Liquid> getItemReader(@Value("${liquid_reader}") Resource resource){
       //  System.out.println("Item Reader Started");
         LOGGER.info("Item Reader Started");
-        FlatFileItemReader<Mandate> flatFileItemReader = new FlatFileItemReader<>();
+        FlatFileItemReader<Liquid> flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setStrict(true);
         flatFileItemReader.setLinesToSkip(1);
         flatFileItemReader.setResource(resource);
@@ -49,15 +49,15 @@ public class SpringBatchConfig {
         return flatFileItemReader;
     }
 
-    private DefaultLineMapper<Mandate> getLineMapper(){
-        DefaultLineMapper<Mandate> lineMapper = new DefaultLineMapper<>();
-        BeanWrapperFieldSetMapper<Mandate> beanWrapperFieldSetMapper = new BeanWrapperFieldSetMapper<>();
-        beanWrapperFieldSetMapper.setTargetType(Mandate.class);
+    private DefaultLineMapper<Liquid> getLineMapper(){
+        DefaultLineMapper<Liquid> lineMapper = new DefaultLineMapper<>();
+        BeanWrapperFieldSetMapper<Liquid> beanWrapperFieldSetMapper = new BeanWrapperFieldSetMapper<>();
+        beanWrapperFieldSetMapper.setTargetType(Liquid.class);
         beanWrapperFieldSetMapper.setStrict(false);
 
         DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer();
         delimitedLineTokenizer.setDelimiter(",");
-        delimitedLineTokenizer.setNames("mandateId","mandateRef","countryCode","type");
+        delimitedLineTokenizer.setNames("liquidId","liquidRef","countryCode","type");
         delimitedLineTokenizer.setStrict(true);
 
         lineMapper.setFieldSetMapper(beanWrapperFieldSetMapper);

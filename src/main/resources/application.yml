@@ -1,6 +1,6 @@
 server:
   port: 9092
-mandate_reader: file:/Users/pradyumnakumardas/Documents/workbook/spring-batch-example 2/src/main/resources/mandate.csv
+liquid_reader: file:/Users/pradyumnakumardas/Documents/workbook/spring-batch-example 2/src/main/resources/liquid.csv
 spring:
   batch:
     job:

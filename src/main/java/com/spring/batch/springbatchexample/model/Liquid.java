@@ -4,9 +4,9 @@ import lombok.Data;
 
 
 @Data
-public class Mandate {
-    private int mandateId;
-    private String mandateRef;
+public class Liquid {
+    private int liquidId;
+    private String liquidRef;
     private String countryCode;
     private String type;
 }

@@ -1,6 +1,7 @@
 server:
   port: 9092
-liquid_reader: file:/Users/pradyumnakumardas/Documents/workbook/spring-batch-example 2/src/main/resources/liquid.csv
+liquid_reader: file:/Users/pradyumnakumardas/Documents/git/spring-batch-example/src/main/resources/liquid.csv
+
 spring:
   batch:
     job:

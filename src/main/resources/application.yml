@@ -15,3 +15,8 @@ spring:
     url: jdbc:h2:mem:dipudb
     username: dipu
     password: dipu
+country:
+  country-map:
+   IN: INDIA
+   ENG: ENGLISH
+   ZAR: SOUTH AFRICA

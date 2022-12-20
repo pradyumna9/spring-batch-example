@@ -39,7 +39,6 @@ public class SpringBatchConfig {
 
     @Bean
     public FlatFileItemReader<Liquid> getItemReader(@Value("${liquid_reader}") Resource resource){
-      //  System.out.println("Item Reader Started");
         LOGGER.info("Item Reader Started");
         FlatFileItemReader<Liquid> flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setStrict(true);
